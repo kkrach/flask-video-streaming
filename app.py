@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 from flask import Flask, render_template, Response
+from envirophat import weather, motion, light
+
 
 # emulated camera
-from camera import Camera
+#from camera import Camera
 
 # Raspberry Pi camera module (requires picamera package)
-# from camera_pi import Camera
+from camera_pi import Camera
 
 app = Flask(__name__)
 
@@ -13,7 +15,10 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     """Video streaming home page."""
-    return render_template('index.html')
+    temp=weather.temperature()
+    press=weather.pressure()
+    li=light.light()
+    return render_template('index.html', temperature=temp, pressure=press, light=li)
 
 
 def gen(camera):
@@ -32,4 +37,4 @@ def video_feed():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, threaded=True)
+    app.run(host='0.0.0.0', port=80, threaded=True)
