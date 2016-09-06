@@ -1,9 +1,13 @@
 <html>
   <head>
-    <title>Video Streaming Demonstration</title>
+    <title>Hundeh&uuml;tte</title>
   </head>
   <body>
-    <h1>Video Streaming Demonstration</h1>
+    <h1>Hundeh&uuml;tte</h1>
+    Temperatur: {{ temperature }}°C<br />
+    Pressure:   {{ pressure }} hPa<br />
+    Light:      {{ light }}<br />
+    <br />
     <img src="{{ url_for('video_feed') }}">
   </body>
 </html>
